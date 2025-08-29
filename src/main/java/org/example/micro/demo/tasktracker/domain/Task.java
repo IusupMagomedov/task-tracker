@@ -10,6 +10,7 @@ import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Data
@@ -31,4 +32,17 @@ public class Task {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> performers;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
